@@ -25,7 +25,8 @@ export default {
       .render(await this.onSearchKeyword())
       .on('@click', e => this.onClickKeyword(e.detail.keyword))
 
-    HistoryView.setup(document.querySelector('#search-history'))
+    HistoryView.setup(document.querySelector('#search-history')) //
+      .on('@click', e => this.onClickHistory(e.detail.keyword))
   },
 
   search(value) {
@@ -55,6 +56,11 @@ export default {
     TabView.hide()
     FormView.inputEl.value = keyword
     FormView.showResetBtn(true)
+  },
+
+  onClickHistory(keyword) {
+    this.search(keyword)
+    HistoryView.hide()
   },
 
   onChangeTab(tabName) {
