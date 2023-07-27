@@ -9,6 +9,7 @@ FormView.setup = function (el) {
 
   this.showResetBtn(false)
   this.bindEvents()
+  return this
 }
 
 FormView.showResetBtn = function (show) {
@@ -17,9 +18,13 @@ FormView.showResetBtn = function (show) {
 
 FormView.handleKeyup = function (e) {
   this.showResetBtn(e.target.value)
+  if (e.key !== 'Enter') return
+  if (!e.target.value.trim()) return
+  this.emit('@submit', { input: e.target.value.trim() })
 }
 
 FormView.bindEvents = function () {
+  this.el.addEventListener('submit', e => e.preventDefault())
   this.inputEl.addEventListener('keyup', e => this.handleKeyup(e))
 }
 
