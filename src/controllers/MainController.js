@@ -18,8 +18,9 @@ export default {
 
     TabView.setup(document.querySelector('#tabs'))
 
-    KeywordView.setup(document.querySelector('#search-keyword')) //
+    KeywordView.setup(document.querySelector('#search-keyword'))
       .render(await this.onSearchKeyword())
+      .on('@click', e => this.onClickKeyword(e.detail.keyword))
   },
 
   search(value) {
@@ -36,6 +37,12 @@ export default {
   async onSearchKeyword() {
     const data = await KeywordModel.list()
     return data
+  },
+
+  onClickKeyword(keyword) {
+    this.search(keyword)
+    KeywordView.hide()
+    TabView.hide()
   },
 
   onSubmitForm(input) {
