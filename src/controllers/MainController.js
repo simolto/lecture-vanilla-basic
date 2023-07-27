@@ -61,6 +61,8 @@ export default {
   onClickHistory(keyword) {
     this.search(keyword)
     HistoryView.hide()
+    FormView.inputEl.value = keyword
+    FormView.showResetBtn(true)
   },
 
   onChangeTab(tabName) {
