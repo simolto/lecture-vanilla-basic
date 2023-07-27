@@ -19,10 +19,10 @@ export default {
   },
 
   onSearchResult(query) {
-    SearchModel.list(query) //
-      .then(res => {
-        ResultView.render(res)
-      })
+    SearchModel.list(query).then(res => {
+      ResultView.show()
+      ResultView.render(res)
+    })
   },
 
   onSubmitForm(input) {
@@ -30,6 +30,6 @@ export default {
   },
 
   onResetForm() {
-    debugger
+    ResultView.hide()
   },
 }
